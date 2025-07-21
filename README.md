@@ -2,7 +2,7 @@
 
 ## Overview
 This Terraform project provisions a fully functional dual-AZ, production-ready AWS VPC, designed to support secure, scalable workloads with minimal deployment effort required. 
-The topology is purpose-built to support cloud connectivity via AutoVPN with redundant Cisco Meraki vMX deployments, and supports typical EC2-based services both behind and upstream of the vMX.
+The topology is purpose-built to support cloud connectivity via AutoVPN with redundant Cisco Meraki vMX deployments.
 
 It includes complete routing, subnet design, and path redundancy, with tagging and dependency mappings to ensure consistent, predictable deployments that are easy to navigate in the UI.
 
