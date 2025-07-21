@@ -1,0 +1,85 @@
+# General
+aws_region		                                    = "us-east-2"
+availability_zones                                          = ["us-east-2a", "us-east-2b"]
+route53_zone_id                                             = "your_Route53_ZoneId"
+ssh_key_name		                                    = "sandbox"
+name_prefix                                                 = "tf-demo"                     # must be lower case
+
+vpc_cidr_block                                              = "10.0.0.0/16"
+
+az_primary_sdwan_cidr                                       = "10.0.10.0/24"
+az_primary_vmx_lan_cidr                                     = "10.0.11.0/24"
+az_primary_public_cidr                                      = "10.0.12.0/24"
+az_primary_private_cidr                                     = "10.0.13.0/24"
+
+az_secondary_sdwan_cidr                                     = "10.0.20.0/24"
+az_secondary_vmx_lan_cidr                                   = "10.0.21.0/24"
+az_secondary_public_cidr                                    = "10.0.22.0/24"
+az_secondary_private_cidr                                   = "10.0.23.0/24"
+
+internal_ec2_sg_trusted_ranges                              = [
+                                                                "1.1.1.1/32",
+                                                                "2.2.2.2/32"
+                                                              ]
+
+# MERAKI 
+meraki_org_id                                               = "your_meraki_org_id"
+meraki_vmx_ami_id                                           = "ami-0682f3ca733136feb" # vMX AMI for us-east-2 
+
+# vMX network names
+vmx_az_primary_network_name                                 = "VMX-AZP"
+vmx_az_secondary_network_name                               = "VMX-AZS"
+
+# WAN IP addresses
+vmx_az_primary_wan_private_ip                               = "10.0.10.5"
+vmx_az_secondary_wan_private_ip                             = "10.0.20.5"
+
+# LAN IP addresses
+vmx_az_primary_lan_private_ip                               = "10.0.11.5"
+vmx_az_secondary_lan_private_ip                             = "10.0.21.5"
+
+# return routes
+vmx_az_primary_return_route_cidrs                           = ["10.10.0.0/16"]
+vmx_az_secondary_return_route_cidrs                         = ["10.20.0.0/16"]
+
+apphost_ami_id		                                    = "ami-********" 
+proxyhost_ami_id		                            = "ami-********" 
+
+az_primary_ubuntu1_private_ip	                            = "10.0.12.5" # proxy1 
+
+az_secondary_ubuntu1_private_ip	                            = "10.0.22.5" # proxy2 
+
+# RDS / Aurora DB settings
+db_name                                                     = "tfdemo"
+db_engine                                                   = "aurora-postgresql"
+db_engine_version                                           = "15.10"
+db_user                                                     = "tfdemo_write_user"
+db_password                                                 = "superSecurePass1!"
+
+# CERTDNS
+# The full domain name for your Django app
+app_dns_cname                                               = "tfdemo.tfdemocorp.com"
+create_alias                                                = true
+
+# Your Route 53 hosted zone name
+# must match exactly — trailing dot optional
+hosted_zone_name                                            = "tfdemocorp.com."
+
+# ECS
+ecs_apps = {
+  djangotestapp = {
+    az_primary = {
+      private_dns_name = "aws-use2-dta-azp.tfdemocorp.com" # not used 
+    }
+    az_secondary = {
+      private_dns_name = "aws-use2-dta-azs.tfdemocorp.com" # not used
+    }
+    app_container_image  = "your_docker_image_uri" # example aws_account_id.dkr.ecr.us-east-2.amazonaws.com/django-test-app:latest"
+    tls_sidecar_image    = "your_docker_image_uri" # example aws_account_id.dkr.ecr.us-east-2.amazonaws.com/django-test-nginx:latest"
+    container_cpu        = 512
+    container_memory     = 1024
+    desired_count        = 1
+    assign_public_ip     = false
+  }
+}
+

@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: django-test-app
+    expose:
+      - "8000"
+      
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: django-test-nginx
+    ports:
+      - "8443:443"
+    depends_on:
+      - app

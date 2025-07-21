@@ -1,0 +1,11 @@
+terraform.tfstate*
+.terraform*
+*.tfvars
+venv/
+*.txt
+*.log
+*.cer
+*.key
+*.tfvars
+!modules/ecs_app_with_tlssc/django_test_app/requirements.txt
+!modules/ecs_app_with_tlssc/django_test_app/setup_instructions.txt
