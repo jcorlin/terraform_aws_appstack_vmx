@@ -1,4 +1,4 @@
-# Hybrid Cloud Lab Infrastructure
+# Hybrid Cloud Infrastructure - Meraki AutoVPN + AWS
 
 ## Overview
 This Terraform project provisions a fully functional dual-AZ, production-ready AWS VPC, designed to support secure, scalable workloads with minimal deployment effort required. 
